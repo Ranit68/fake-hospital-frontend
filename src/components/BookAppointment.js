@@ -22,7 +22,7 @@ const BookAppointment = ({ doctorId, patientId, onClose }) => {
 
       alert('Appointment booked successfully!');
       // open PDF in new tab
-      window.open(`https://fake-hospital-backend.onrender-1.com/api/appointment/pdf/${response.data.id}`, '_blank');
+      window.open(`https://fake-hospital-backend-1.onrender.com/api/appointment/pdf/${response.data.id}`, '_blank');
 
       if (onClose) onClose();
       navigate('/appointments');
