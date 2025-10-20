@@ -10,7 +10,7 @@ const DepartmentList = ({ onSelectDepartment }) => {
     const navigate = useNavigate();  // Add this hook
 
     useEffect(() => {
-        axios.get('https://fake-hospital-backend.onrender.com/api/departments')
+        axios.get('https://fake-hospital-backend-1.onrender.com/api/departments')
             .then(response => {
                 console.log('API Response:', response.data);
                 if (Array.isArray(response.data)) {
