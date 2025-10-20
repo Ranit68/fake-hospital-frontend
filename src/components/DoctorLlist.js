@@ -85,12 +85,16 @@ const DoctorList = ({ departmentId: propDeptId }) => {
       const newPatient = patientRes.data;
 
       // Book appointment correctly (match AppointmentRequest DTO)
-      const appointmentRes = await axios.post(`${API_BASE}/appointment`, {
-        doctorId: selectedDoctorId,
-        patientId: newPatient.id,
-        date: appointmentDate,
-        time: '10:00',
-      });
+     const appointmentRes = await axios.post(
+  'https://fake-hospital-backend-1.onrender.com/api/appointment',
+  {
+    date: appointmentDate,
+    time: '10:00',
+    doctorId: selectedDoctorId,
+    patientId: newPatient.id
+  }
+);
+
 
       alert('✅ Appointment booked successfully!');
       console.log('Appointment Response:', appointmentRes.data);
