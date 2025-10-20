@@ -37,7 +37,7 @@ const DoctorList = ({ departmentId: propDeptId }) => {
   // Fetch doctors
   useEffect(() => {
     if (!departmentId) return; 
-    axios.get(`http://localhost:8080/api/doctors/department/${departmentId}`)
+    axios.get(`https://fake-hospital-backend-1.onrender.com/api/doctors/department/${departmentId}`)
       .then((res) => {
         if (Array.isArray(res.data)) {
           setDoctors(res.data);
