@@ -29,7 +29,7 @@ const DoctorDashboard = () => {
             .then(res => setDoctor(res.data))
             .catch(err => console.error("Fetch doctor error:", err));
 
-        axios.get(`https://fake-hospital-backend.onrender.com/api/doctors/${id}/appointments`)
+        axios.get(`https://fake-hospital-backend-1.onrender.com/api/doctors/${id}/appointments`)
             .then(res => setAppointments(res.data))
             .catch(err => console.error("Fetch appointments error:", err));
     }, [id]);
@@ -37,7 +37,7 @@ const DoctorDashboard = () => {
     const handleChange = (e) => setDoctor({ ...doctor, [e.target.name]: e.target.value });
 
     const handleSave = () => {
-        axios.post(`https://fake-hospital-backend.onrender.com/api/doctors/profile`, doctor)
+        axios.post(`https://fake-hospital-backend-1.onrender.com/api/doctors/profile`, doctor)
             .then(res => {
                 setDoctor(res.data);
                 setEditMode(false);
@@ -140,7 +140,7 @@ const DoctorDashboard = () => {
                                         <Button
                                             variant="outlined"
                                             size="small"
-                                            onClick={() => window.open(`http://localhost:8080/api/appointment/pdf/${a.id}`, "_blank")}
+                                            onClick={() => window.open(`https://fake-hospital-backend-1.onrender.com/api/appointment/pdf/${a.id}`, "_blank")}
                                         >
                                             Download PDF
                                         </Button>
