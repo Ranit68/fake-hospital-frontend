@@ -11,11 +11,17 @@ const BookAppointment = ({ doctorId, patientId }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('https://fake-hospital-backend-1.onrender.com/api/appointments', {
-            date, time, patient: { id: patientId }, doctor: { id: doctorId }
-        })
+        axios.post('https://fake-hospital-backend-1.onrender.com/api/appointment', {
+              doctorId: doctorId,
+              patientId: patientId,
+              date: date,
+              time: time
+            })
+
         .then(() => {
             alert('Appointment booked successfully!');
+            window.open(`https://fake-hospital-backend-1.onrender.com/api/appointment/pdf/${res.data.id}`, '_blank');
+            handleCloseModal();
             navigate('/appointments');  // Navigate to appointments list after booking
         })
         .catch(error => {
