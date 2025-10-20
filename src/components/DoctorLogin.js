@@ -10,7 +10,7 @@ const DoctorLogin = () => {
 
     const handleLogin = async () => {
         try {
-            const res = await axios.get("https://fake-hospital-backend.onrender.com/api/doctors/login", {
+            const res = await axios.get("https://fake-hospital-backend-1.onrender.com/api/doctors/login", {
                 params: { email: email.trim(), password: password.trim() }
             });
             const doctor = res.data;
