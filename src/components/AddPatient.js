@@ -8,7 +8,7 @@ const AddPatient = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('https://fake-hospital-backend.onrender.com/api/patients', { name, email, phone })
+        axios.post('https://fake-hospital-backend.onrender-1.com/api/patients', { name, email, phone })
             .then(() => alert('Patient added'))
             .catch(error => console.error(error));
     };
