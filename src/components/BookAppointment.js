@@ -11,7 +11,7 @@ const BookAppointment = ({ doctorId, patientId }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('https://fake-hospital-backend.onrender.com/api/appointments', {
+        axios.post('https://fake-hospital-backend-1.onrender.com/api/appointments', {
             date, time, patient: { id: patientId }, doctor: { id: doctorId }
         })
         .then(() => {
