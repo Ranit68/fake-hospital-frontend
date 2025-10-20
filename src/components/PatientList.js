@@ -5,7 +5,7 @@ const PatientList = () => {
     const [patients, setPatients] = useState([]);
 
     useEffect(() => {
-        axios.get('https://fake-hospital-backend.onrender.com/api/patients')
+        axios.get('https://fake-hospital-backend-1.onrender.com/api/patients')
             .then(response => setPatients(response.data))
             .catch(error => console.error(error));
     }, []);
