@@ -6,7 +6,7 @@ const AppointmentList = () => {
 
   useEffect(() => {
     axios
-      .get('https://fake-hospital-backend.onrender.com/api/appointment')
+      .get('https://fake-hospital-backend-1.onrender.com/api/appointment')
       .then((response) => setAppointments(response.data))
       .catch((error) => console.error('Error fetching appointments:', error));
   }, []);
