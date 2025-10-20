@@ -74,21 +74,21 @@ const DoctorList = ({ departmentId: propDeptId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const patientRes = await axios.post('https://fake-hospital-backend.onrender.com/api/patients', {
+      const patientRes = await axios.post('https://fake-hospital-backend-1.onrender.com/api/patients', {
         name: patientName,
         phone: patientPhone,
         email: patientEmail || null
       });
       const newPatient = patientRes.data;
 
-      const appointmentRes = await axios.post('https://fake-hospital-backend.onrender.com/api/appointment', {
+      const appointmentRes = await axios.post('https://fake-hospital-backend-1.onrender.com/api/appointment', {
         date: appointmentDate,
         time: '10:00',
         patient: { id: newPatient.id },
         doctor: { id: selectedDoctorId }
       });
       alert('Appointment booked successfully!');
-      window.open(`https://fake-hospital-backend.onrender.com/api/appointment/pdf/${appointmentRes.data.id}`, '_blank');
+      window.open(`https://fake-hospital-backend-1.onrender.com/api/appointment/pdf/${appointmentRes.data.id}`, '_blank');
       handleCloseModal();
       navigate('/appointments');
     } catch (err) {
