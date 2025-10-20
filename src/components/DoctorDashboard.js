@@ -25,7 +25,7 @@ const DoctorDashboard = () => {
     const [appointments, setAppointments] = useState([]);
 
     useEffect(() => {
-        axios.get(`https://fake-hospital-backend.onrender.com/api/doctors/${id}`)
+        axios.get(`https://fake-hospital-backend-1.onrender.com/api/doctors/${id}`)
             .then(res => setDoctor(res.data))
             .catch(err => console.error("Fetch doctor error:", err));
 
