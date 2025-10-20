@@ -34,10 +34,12 @@ const DoctorList = ({ departmentId: propDeptId }) => {
 
   const navigate = useNavigate();
 
+  const API_BASE = 'https://fake-hospital-backend-1.onrender.com/api';
+
   // Fetch doctors
   useEffect(() => {
-    if (!departmentId) return; 
-    axios.get(`https://fake-hospital-backend-1.onrender.com/api/doctors/department/${departmentId}`)
+    if (!departmentId) return;
+    axios.get(`${API_BASE}/doctors/department/${departmentId}`)
       .then((res) => {
         if (Array.isArray(res.data)) {
           setDoctors(res.data);
@@ -53,7 +55,7 @@ const DoctorList = ({ departmentId: propDeptId }) => {
   // Filter by specialty
   useEffect(() => {
     const filtered = doctors.filter(doc =>
-      doc.specialty.toLowerCase().includes(searchTerm.toLowerCase())
+      doc.specialty?.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredDoctors(filtered);
   }, [searchTerm, doctors]);
@@ -74,26 +76,33 @@ const DoctorList = ({ departmentId: propDeptId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const patientRes = await axios.post('https://fake-hospital-backend-1.onrender.com/api/patients', {
+      // Create patient first
+      const patientRes = await axios.post(`${API_BASE}/patients`, {
         name: patientName,
         phone: patientPhone,
-        email: patientEmail || null
+        email: patientEmail || null,
       });
       const newPatient = patientRes.data;
 
-      const appointmentRes = await axios.post('https://fake-hospital-backend-1.onrender.com/api/appointment', {
+      // Book appointment correctly (match AppointmentRequest DTO)
+      const appointmentRes = await axios.post(`${API_BASE}/appointment`, {
+        doctorId: selectedDoctorId,
+        patientId: newPatient.id,
         date: appointmentDate,
         time: '10:00',
-        patient: { id: newPatient.id },
-        doctor: { id: selectedDoctorId }
       });
-      alert('Appointment booked successfully!');
-      window.open(`https://fake-hospital-backend-1.onrender.com/api/appointment/pdf/${appointmentRes.data.id}`, '_blank');
+
+      alert('✅ Appointment booked successfully!');
+      console.log('Appointment Response:', appointmentRes.data);
+
+      // Open PDF ticket
+      window.open(`${API_BASE}/appointment/pdf/${appointmentRes.data.id}`, '_blank');
+
       handleCloseModal();
       navigate('/appointments');
     } catch (err) {
-      console.error(err);
-      alert('Failed to book appointment');
+      console.error('❌ Failed to book appointment:', err.response?.data || err.message);
+      alert('Failed to book appointment. Please try again.');
     }
   };
 
